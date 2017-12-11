@@ -2,91 +2,54 @@ library(shiny)
 
 ###requires install.packages("shinythemes")
 
-ui <- fluidPage(theme = shinytheme("darkly"), 
-  tags$style(type = 'text/css', '.navbar { background-color:black;
-                           font-family: Arial;
-                           font-size: 13px;
-                           color:black; }',
-                                                         
+ui <- fluidPage(theme = shinytheme("darkly"),
+  
+  fluidRow(column(width = 4,
+                  tags$img(src = "logo.jpg")), 
+           column(width = 6, 
+                  tags$h1("raceR", style = "color:red;"))),
 
-                                                         
-                            '.navbar-default .navbar-brand {
-                             color:red;
-                           }'),
-               
-        navbarPage("raceR",
-            tabPanel("Single", fluidRow(column(width = 4,
-                                               tags$img(src = "logo.jpg")), 
-                                        column(width = 6, 
-                                               tags$h1("raceR", style = "color:red;"))),
-                     
-                     fluidRow(column(width = 12,
-                                     fileInput("upload1", label = h4("Upload .csv here")))),
-                     
-                     fluidRow(column(width = 12, selectInput("graphtype1", label = h5("Choose Graph"),
-                                                             choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
-                                                                            "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
-                                                                            "RPM by Speed" = "rpm_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                            "Air to Fuel Ratio vs RPM" = "airfuel"),
-                                                             selected = "mapspeed"))),
-                     
-                     
-                     fluidRow(column(width = 12,
-                                     sliderInput("distrange", label = h5("Select Distance"), 
-                                                 min = 0,
-                                                 max = 3.5, value = c(0, 3.5)))),
-                     
-                     fluidRow(column(width = 12,
-                                     plotOutput("graph1"))),
-                     
-                     fluidRow(column(width = 12,
-                                     tableOutput("table1")))), 
-              tabPanel("Compare", 
-                       fluidRow(column(width = 6,
-                                       tags$img(src = "logo.jpg")), 
-                                column(width = 6, 
-                                       tags$h1("raceR", style = "color:red;"))),
-                       
-                       fluidRow(column(width = 6,
-                                       fileInput("upload1", label = h4("Upload .csv here"))),
-                                column(width = 6,
-                                       fileInput("upload2", label = h4("Upload .csv here")))),
-                       
-                       
-                       fluidRow(column(width = 4,
-                                       selectInput("graphtype1", label = h5("Choose Graph"),
-                                                   choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
-                                                                  "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
-                                                                  "RPM by Speed" = "rpm_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                  "Air to Fuel Ratio vs RPM" = "airfuel"),
-                                                   selected = "mapspeed")),
-                                
-                                column(width = 4,
-                                       sliderInput("distrange", label = h5("Select Distance"), 
-                                                   min = 0,
-                                                   max = 3.5, value = c(0, 3.5))),
-                                
-                                
-                                column(width = 4,
-                                       selectInput("graphtype2", label = h5("Choose Graph"),
-                                                   choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
-                                                                  "Graph of Lap Speed" = "laps", "RPM by Gear" = "RPM_gear", 
-                                                                  "RPM by Speed" = "RPM_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                  "Air to Fuel Ratio vs RPM" = "airfuel"),
-                                                   selected = "mapspeed"))),
-                       
-                       fluidRow(column(width = 6,
-                                       plotOutput("graph1")),
-                                column(width = 6,
-                                       plotOutput("graph2"))),
-                       
-                       fluidRow(column(width = 6,
-                                       tableOutput("table1")),
-                                column(width = 6,
-                                       tableOutput("table2"))
-                       )
-                     ))) 
-                
+  fluidRow(column(width = 6,
+                  fileInput("upload1", label = h4("Upload .csv here"))),
+           column(width = 6,
+                  fileInput("upload2", label = h4("Upload .csv here")))),
+
+
+  fluidRow(column(width = 4,
+                  selectInput("graphtype1", label = h5("Choose Graph"),
+                              choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
+                                             "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
+                                             "RPM by Speed" = "rpm_speed", "Map of Lap Speed" = "mapspeed", 
+                                             "Air to Fuel Ratio vs RPM" = "airfuel"),
+                              selected = "mapspeed")),
+
+           column(width = 4,
+                  sliderInput("distrange", label = h5("Select Distance"), 
+                              min = 0,
+                              max = 3.5, value = c(0, 3.5))),
+
+
+           column(width = 4,
+                  selectInput("graphtype2", label = h5("Choose Graph"),
+                        choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
+                                        "Graph of Lap Speed" = "laps", "RPM by Gear" = "RPM_gear", 
+                                         "RPM by Speed" = "RPM_speed", "Map of Lap Speed" = "mapspeed", 
+                                         "Air to Fuel Ratio vs RPM" = "airfuel"),
+                                          selected = "mapspeed"))),
+
+  fluidRow(column(width = 6,
+                  plotOutput("graph1")),
+           column(width = 6,
+                  plotOutput("graph2"))),
+  
+  fluidRow(column(width = 6,
+                   tableOutput("table1")),
+           column(width = 6,
+                  tableOutput("table2"))
+                    )
+
+
+)
 
 
 server <- function(input, output) {
