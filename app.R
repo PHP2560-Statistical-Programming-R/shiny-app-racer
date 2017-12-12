@@ -1,8 +1,11 @@
 library(shiny)
+library(tidyverse)
+library(shinythemes)
+library(racecar)
 
-###requires install.packages("shinythemes")
+###requires racecar package
 
-ui <- fluidPage(theme = shinytheme("darkly"), 
+ui <- fluidPage(theme = shinytheme("cyborg"), 
   tags$style(type = 'text/css', '.navbar { background-color:black;
                            font-family: Arial;
                            font-size: 13px;
