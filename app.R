@@ -2,6 +2,7 @@ library(shiny)
 
 ###requires install.packages("shinythemes")
 
+library(shinythemes)
 ui <- fluidPage(theme = shinytheme("darkly"), 
   tags$style(type = 'text/css', '.navbar { background-color:black;
                            font-family: Arial;
