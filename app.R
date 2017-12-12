@@ -5,7 +5,12 @@ library(racecar)
 
 ###requires racecar package
 
+<<<<<<< HEAD
 ui <- fluidPage(theme = shinytheme("cyborg"), 
+=======
+library(shinythemes)
+ui <- fluidPage(theme = shinytheme("darkly"), 
+>>>>>>> 9b2740d7f68086693f9c2b6738b832db1cf5826a
   tags$style(type = 'text/css', '.navbar { background-color:black;
                            font-family: Arial;
                            font-size: 13px;
