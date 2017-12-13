@@ -1,7 +1,7 @@
 Use of app:
-
+(Blain)
 Creation process:
-
+(Fuyu)
 Individual roles:
 - Blain:
 - Fuyu:
