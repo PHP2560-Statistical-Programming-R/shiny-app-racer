@@ -17,7 +17,9 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                          
                             '.navbar-default .navbar-brand {
                              color:red;
-                           }'),
+                           }',
+             ".shiny-output-error { visibility: hidden; }",
+             ".shiny-output-error:before { visibility: hidden; }"),
                
         navbarPage("raceR",
                    
