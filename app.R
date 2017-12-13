@@ -12,12 +12,11 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                            font-family: Arial;
                            font-size: 13px;
                            color:black; }',
-                                                         
-
-                                                         
                             '.navbar-default .navbar-brand {
                              color:red;
-                           }'),
+                           }',
+             ".shiny-output-error { visibility: hidden; }",
+             ".shiny-output-error:before { visibility: hidden; }"),
                
         navbarPage("raceR",
                    
