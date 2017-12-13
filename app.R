@@ -36,7 +36,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                              choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
                                                                             "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
                                                                             "RPM by Speed" = "rpm_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                            "Air to Fuel Ratio vs RPM" = "airfuel"),
+                                                                            "Air to Fuel Ratio vs RPM" = "airfuel", 
+                                                                            "Oil Pressure Map" = "oilpressure"),
                                                              selected = "mapspeed"))),
                      
                      
@@ -68,7 +69,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                    choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
                                                                   "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
                                                                   "RPM by Speed" = "rpm_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                  "Air to Fuel Ratio vs RPM" = "airfuel"),
+                                                                  "Air to Fuel Ratio vs RPM" = "airfuel",
+                                                                  "Oil Pressure Map" = "oilpressure"),
                                                    selected = "mapspeed")),
                                 
                                 column(width = 4,
@@ -82,7 +84,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                    choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
                                                                   "Graph of Lap Speed" = "laps", "RPM by Gear" = "RPM_gear", 
                                                                   "RPM by Speed" = "RPM_speed", "Map of Lap Speed" = "mapspeed", 
-                                                                  "Air to Fuel Ratio vs RPM" = "airfuel"),
+                                                                  "Air to Fuel Ratio vs RPM" = "airfuel",
+                                                                  "Oil Pressure Map" = "oilpressure"),
                                                    selected = "mapspeed"))),
                        
                        fluidRow(column(width = 6,
@@ -127,7 +130,10 @@ server <- function(input, output) {
     } else if (input$graphtype1 %in% c("airfuel")) {
       airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
       
-    }
+    } else if (input$graphtype1 %in% c("oilpressure")) {
+      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      
+    } 
   })
   
   output$graph2 <- renderPlot({
@@ -151,6 +157,9 @@ server <- function(input, output) {
       
     } else if (input$graphtype2 %in% c("airfuel")) {
       airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      
+    } else if (input$graphtype2 %in% c("oilpressure")) {
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
       
     }
     
@@ -177,6 +186,9 @@ server <- function(input, output) {
       
     } else if (input$graphtype3 %in% c("airfuel")) {
       airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      
+    } else if (input$graphtype3 %in% c("oilpressure")) {
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
       
     }
     
@@ -230,7 +242,13 @@ server <- function(input, output) {
         filter(Distance <= input$distrange1[2]) %>%
         summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
       
-    }
+    } else if (input$graphtype1 %in% c("oilpressure")) {
+      input_data %>%
+        filter(Distance >= input$distrange1[1]) %>%
+        filter(Distance <= input$distrange1[2]) %>%
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+      
+    } 
   })
 
   
@@ -282,6 +300,12 @@ server <- function(input, output) {
         filter(Distance <= input$distrange2[2]) %>%
         summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
       
+    } else if (input$graphtype2 %in% c("oilpressure")) {
+      input_data %>%
+        filter(Distance >= input$distrange2[1]) %>%
+        filter(Distance <= input$distrange2[2]) %>%
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+      
     }
   })
   
@@ -332,6 +356,12 @@ server <- function(input, output) {
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
         summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+      
+    }  else if (input$graphtype3 %in% c("oilpressure")) {
+      input_data %>%
+        filter(Distance >= input$distrange2[1]) %>%
+        filter(Distance <= input$distrange2[2]) %>%
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
       
     }
   })
