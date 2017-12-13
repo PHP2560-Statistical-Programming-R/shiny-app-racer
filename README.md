@@ -1,5 +1,11 @@
-# Final shiny-app
+Use of app:
 
+Creation process:
+
+Individual roles:
+- Blain:
+- Fuyu:
+- Jess:
 
 ## What to do
 
