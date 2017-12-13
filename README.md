@@ -1,12 +1,3 @@
-Use of app:
-(Blain)
-Creation process:
-(Fuyu)
-Individual roles:
-- Blain:
-- Fuyu:
-- Jess:
-
 ## What to do
 
 1. Place all your current files in here for your shiny app. 
