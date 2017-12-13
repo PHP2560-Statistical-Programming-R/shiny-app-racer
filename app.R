@@ -1,3 +1,5 @@
+source(check_packages.R)
+
 library(shiny)
 library(tidyverse)
 library(shinythemes)
