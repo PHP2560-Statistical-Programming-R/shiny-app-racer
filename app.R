@@ -7,7 +7,8 @@ library(racecar)
 
 ###requires racecar package
 
-ui <- fluidPage(theme = shinytheme("cyborg"), 
+ui <- fluidPage(theme = shinytheme("cyborg"),
+                ####CSS CODE TO FORMAT THE TWO TAB NAVIGATION BAR
   tags$style(type = 'text/css', '.navbar { background-color:black;
                            font-family: Arial;
                            font-size: 13px;
@@ -15,6 +16,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                             '.navbar-default .navbar-brand {
                              color:red;
                            }',
+             
+             ####CSS CODE TO SUPRESS INITIAL WARNING ERROS WHEN DATA IS NOT UPLOADED
              ".shiny-output-error { visibility: hidden; }",
              ".shiny-output-error:before { visibility: hidden; }"),
                
@@ -25,10 +28,12 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                tags$img(src = "logo.jpg")), 
                                         column(width = 6, 
                                                tags$h1("raceR", style = "color:red;"))),
+            ######## csv upload box for single data tab
                      
                      fluidRow(column(width = 12,
                                      fileInput("upload1", label = h4("Upload .csv here")))),
-                     
+            
+            ######## graph choice drop down for single data tab           
                      fluidRow(column(width = 12, selectInput("graphtype1", label = h5("Choose Graph"),
                                                              choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
                                                                             "Graph of Lap Speed" = "laps", "RPM by Gear" = "rpm_gear", 
@@ -37,30 +42,32 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                             "Oil Pressure Map" = "oilpressure"),
                                                              selected = "mapspeed"))),
                      
-                     
+            ######## distance slider for single data tab       
                      fluidRow(column(width = 12,
                                      sliderInput("distrange1", label = h5("Select Distance"), 
                                                  min = 0,
                                                  max = 3.5, value = c(0, 3.5)))),
-                     
+            ######## graphical output for single data tab         
                      fluidRow(column(width = 12,
                                      plotOutput("graph1"))),
-                     
+            ######## summary statistics output for single data tab         
                      fluidRow(column(width = 12,
                                      tableOutput("table1")))), 
+            
             ######### tab for looking at two sets of data - compare two drivers or compare two laps of the same driver #########    
               tabPanel("Compare", 
                        fluidRow(column(width = 6,
                                        tags$img(src = "logo.jpg")), 
                                 column(width = 6, 
                                        tags$h1("raceR", style = "color:red;"))),
-                       
+                       ######## left csv upload box for compare data tab      
                        fluidRow(column(width = 6,
                                        fileInput("upload2", label = h4("Upload .csv here"))),
+                       ######## right csv upload box for compare data tab  
                                 column(width = 6,
                                        fileInput("upload3", label = h4("Upload .csv here")))),
                        
-                       
+                       ######## left graph choice drop down for compare data tab
                        fluidRow(column(width = 4,
                                        selectInput("graphtype2", label = h5("Choose Graph"),
                                                    choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
@@ -69,13 +76,13 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                   "Air to Fuel Ratio vs RPM" = "airfuel",
                                                                   "Oil Pressure Map" = "oilpressure"),
                                                    selected = "mapspeed")),
-                                
+                                ######## distance slider for compare data tab
                                 column(width = 4,
                                        sliderInput("distrange2", label = h5("Select Distance"), 
                                                    min = 0,
                                                    max = 3.5, value = c(0, 3.5))),
                                 
-                                
+                                ######## right graph choice drop down for compare data tab       
                                 column(width = 4,
                                        selectInput("graphtype3", label = h5("Choose Graph"),
                                                    choices = list("Braking Map" = "braking", "Throttle Position Map" = "throttle",
@@ -84,14 +91,17 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                   "Air to Fuel Ratio vs RPM" = "airfuel",
                                                                   "Oil Pressure Map" = "oilpressure"),
                                                    selected = "mapspeed"))),
-                       
+                       ######## left graphical output for compare data tab 
                        fluidRow(column(width = 6,
                                        plotOutput("graph2")),
+                                ######## right graphical output for compare data tab           
                                 column(width = 6,
                                        plotOutput("graph3"))),
-                       
+                       ######## left summary statistics output for compare data tab  
                        fluidRow(column(width = 6,
                                        tableOutput("table2")),
+                                
+                                ######## right summary statistics output for compare data tab  
                                 column(width = 6,
                                        tableOutput("table3"))
                        )
@@ -103,7 +113,7 @@ server <- function(input, output) {
 
   options(shiny.maxRequestSize = 50*1024^2)
 
-  
+  ##create plot for single data tab based on user input from dropdown menu
   output$graph1 <- renderPlot( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
     if(input$graphtype1 %in% c("laps")) {
@@ -132,7 +142,7 @@ server <- function(input, output) {
       
     } 
   })
-  
+  ##create left plot for compare data tab based on user input from dropdown menu
   output$graph2 <- renderPlot({
     input_data <- cleanSingleLap(input$upload2$datapath, 1)
     if(input$graphtype2 %in% c("laps")) {
@@ -161,7 +171,7 @@ server <- function(input, output) {
     }
     
 })
-  
+  ##create right plot for compare data tab based on user input from dropdown menu 
   output$graph3 <- renderPlot({
     input_data <- cleanSingleLap(input$upload3$datapath, 1)
     if(input$graphtype3 %in% c("laps")) {
@@ -190,7 +200,7 @@ server <- function(input, output) {
     }
     
   })
-  
+  ##create summary statistics table for single data tab
   output$table1 <- renderTable( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
     if(input$graphtype1 %in% c("laps")) {
@@ -248,7 +258,7 @@ server <- function(input, output) {
     } 
   })
 
-  
+  ##create left summary statistics table for compare data tab
   output$table2 <- renderTable( {
     input_data <- cleanSingleLap(input$upload2$datapath, 1)
     if(input$graphtype2 %in% c("laps")) {
@@ -305,7 +315,7 @@ server <- function(input, output) {
       
     }
   })
-  
+  ##create right summary statistics table for compare data tab 
   output$table3 <- renderTable( {
     input_data <- cleanSingleLap(input$upload3$datapath, 1)
     if(input$graphtype3 %in% c("laps")) {
