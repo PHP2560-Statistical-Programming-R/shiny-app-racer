@@ -138,7 +138,7 @@ server <- function(input, output) {
       airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) 
       
     } 
   })
