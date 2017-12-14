@@ -17,7 +17,7 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                              color:red;
                            }',
              
-             ####CSS CODE TO SUPRESS INITIAL WARNING ERROS WHEN DATA IS NOT UPLOADED
+             ####CSS CODE TO SUPRESS INITIAL WARNING ERRORS WHEN DATA IS NOT UPLOADED
              ".shiny-output-error { visibility: hidden; }",
              ".shiny-output-error:before { visibility: hidden; }"),
                
@@ -138,7 +138,7 @@ server <- function(input, output) {
       airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) 
       
     } 
   })
