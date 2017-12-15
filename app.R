@@ -4,7 +4,7 @@ library(shiny)
 library(tidyverse)
 library(shinythemes)
 library(racecar)
-
+library(plotly)
 ###requires racecar package
 
 ui <- fluidPage(theme = shinytheme("cyborg"),
@@ -49,7 +49,7 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                  max = 3.5, value = c(0, 3.5)))),
             ######## graphical output for single data tab         
                      fluidRow(column(width = 12,
-                                     plotOutput("graph1"))),
+                                     plotlyOutput("graph1"))), verbatimTextOutput("event"),
             ######## summary statistics output for single data tab         
                      fluidRow(column(width = 12,
                                      tableOutput("table1")))), 
@@ -93,10 +93,10 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                    selected = "mapspeed"))),
                        ######## left graphical output for compare data tab 
                        fluidRow(column(width = 6,
-                                       plotOutput("graph2")),
+                                       plotlyOutput("graph2")),
                                 ######## right graphical output for compare data tab           
                                 column(width = 6,
-                                       plotOutput("graph3"))),
+                                       plotlyOutput("graph3"))),
                        ######## left summary statistics output for compare data tab  
                        fluidRow(column(width = 6,
                                        tableOutput("table2")),
@@ -114,7 +114,7 @@ server <- function(input, output) {
   options(shiny.maxRequestSize = 50*1024^2)
 
   ##create plot for single data tab based on user input from dropdown menu
-  output$graph1 <- renderPlot( {
+  output$graph1 <- renderPlotly( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
     if(input$graphtype1 %in% c("laps")) {
     lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
@@ -142,8 +142,12 @@ server <- function(input, output) {
       
     } 
   })
+  output$event <- renderPrint({
+    d <- event_data("plotly_hover")
+    if (is.null(d)) "Hover on a point!" else d
+  })
   ##create left plot for compare data tab based on user input from dropdown menu
-  output$graph2 <- renderPlot({
+  output$graph2 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload2$datapath, 1)
     if(input$graphtype2 %in% c("laps")) {
       lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
@@ -172,7 +176,7 @@ server <- function(input, output) {
     
 })
   ##create right plot for compare data tab based on user input from dropdown menu 
-  output$graph3 <- renderPlot({
+  output$graph3 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload3$datapath, 1)
     if(input$graphtype3 %in% c("laps")) {
       lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
