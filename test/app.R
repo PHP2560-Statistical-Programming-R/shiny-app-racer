@@ -95,13 +95,11 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                     ######## left graphical output for compare data tab 
                                     fluidRow(column(width = 6,
                                                     plotlyOutput("graph2")),
-                                             ######## right graphical output for compare data tab
+                                             ######## right graphical output for compare data tab           
                                              column(width = 6,
                                                     plotlyOutput("graph3"))),
                                     
-                                    fluidRow(column(width = 6, verbatimTextOutput("event1")),
-                                            
-                                             column(width = 6, verbatimTextOutput("event2"))),
+                                             
                                     ######## left summary statistics output for compare data tab  
                                     fluidRow(column(width = 6,
                                                     tableOutput("table2")),
@@ -178,10 +176,7 @@ server <- function(input, output) {
       oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
       
     }
-    output$event1 <- renderPrint({
-      d <- event_data("plotly_hover")
-      if (is.null(d)) "Hover on a point!" else d
-    })
+    
   })
   ##create right plot for compare data tab based on user input from dropdown menu 
   output$graph3 <- renderPlotly({
@@ -210,10 +205,7 @@ server <- function(input, output) {
       oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
       
     }
-    output$event2 <- renderPrint({
-      d <- event_data("plotly_hover")
-      if (is.null(d)) "Hover on a point!" else d
-    })
+    
   })
   ##create summary statistics table for single data tab
   output$table1 <- renderTable( {
