@@ -1,4 +1,4 @@
-#source(check_packages.R)
+#source("check_packages.R")
 
 library(shiny)
 library(tidyverse)
@@ -48,8 +48,9 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                 max = 3.5, value = c(0, 3.5)))),
                                     ######## graphical output for single data tab         
                                     fluidRow(column(width = 12, height = "auto",
-                                                    plotlyOutput("graph1"))), 
-                                    verbatimTextOutput("event"),
+                                                    plotlyOutput("graph1")),
+                                    ######## test output for the point on the graph         
+                                             verbatimTextOutput("event")),
                                     ######## summary statistics output for single data tab         
                                     fluidRow(column(width = 12,
                                                     tableOutput("table1")))), 
@@ -95,7 +96,6 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                              ######## right graphical output for compare data tab           
                                              column(width = 6, height = "400px",
                                                     plotlyOutput("graph3"))),
-                                    
                                     
                                     ######## left summary statistics output for compare data tab  
                                     fluidRow(column(width = 6,
