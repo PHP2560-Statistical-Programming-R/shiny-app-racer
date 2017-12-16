@@ -203,44 +203,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype1 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype1 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype1 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype1 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     } 
   })
@@ -253,44 +253,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype2 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype2 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype2 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype2 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype2 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     } else if (input$graphtype2 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     }
   })
@@ -302,44 +302,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype3 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype3 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype3 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype3 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype3 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     }  else if (input$graphtype3 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     }
   })
