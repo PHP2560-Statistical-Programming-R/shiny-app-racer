@@ -29,7 +29,7 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                              tags$h1("raceR", style = "color:red;"))),
                                               fluidRow(column(width = 12, 
                                                               tags$h3("Welcome to raceR!"), 
-                                                            
+                                                              tags$h5("raceR creates visualizations of telemetry data."),
                                                               tags$h5("Choose the 'Single' tab if you are interested in looking at data for a single lap by a 
                                                                       single driver and do not want to compare it to other data."), 
                                                               tags$h5("Choose the 'Compare' tab if you are interested in comparing lap data among 2 different
