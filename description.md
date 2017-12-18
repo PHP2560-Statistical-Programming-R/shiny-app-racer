@@ -5,11 +5,13 @@ Use of app:
 Creation process:
 (Fuyu)
 Individual roles:
+
 # Blain:
--
--
--
--
+- Helped design the layout of the app
+- Added summary statistics table to each graph
+- Added the distance selector that zooms into specific parts of the track 
+- Helped decide which graphs to create from textbook
+
 # Fuyu:
 - Helped design the layout of the app
 - Helped write the code in graph output
