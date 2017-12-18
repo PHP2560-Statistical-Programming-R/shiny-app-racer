@@ -27,22 +27,16 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                              tags$img(src = "logo.jpg")), 
                                                       column(width = 6, 
                                                              tags$h1("raceR", style = "color:red;"))),
-                                              fluidRow(column(width = 12, tags$h4("Welcome to raceR! This app provides an interactive interface
-                                                                                  that complements the racecar package. RaceR is 
-                                                                                  designed to be used by those interested in perfomance analytics 
-                                                                                  from racecar data and provides a simple design for generating and 
-                                                                                  comparing the most common plots used to analyze racecar data. 
-                                                                                  The data is measured from the car while driving 
-                                                                                  around a race track. The car sends the data to racestudio2 software. 
-                                                                                  The data can be exported from racestudio2 into a csv. The files uploaded
-                                                                                  to this app should only be .csv exports from racestudio2."), 
-                                                              tags$h5("raceR provides two different options for looking at data - shown above as 'Single' and 
-                                                                      'Compare'."), 
+                                              fluidRow(column(width = 12, 
+                                                              tags$h3("Welcome to raceR!"), 
+                                                              tags$h5("raceR creates visualizations of telemetry data."),
                                                               tags$h5("Choose the 'Single' tab if you are interested in looking at data for a single lap by a 
                                                                       single driver and do not want to compare it to other data."), 
                                                               tags$h5("Choose the 'Compare' tab if you are interested in comparing lap data among 2 different
-                                                                       driver, comparing 2 laps completed by the same driver, or looking at different plots for the
-                                                                      same driver on the same lap.")))),
+                                                                       drivers, comparing 2 laps completed by the same driver, or looking at different variables for the
+                                                                      same lap."),
+                                
+                                                              tags$h5("raceR is designed to be used with telemetry data from the Brown Formula Racing Team.")))),
                            
                            
                            ######### tab for looking at one set of data - for one driver or one lap #########       
@@ -143,6 +137,7 @@ server <- function(input, output) {
   ##create plot for single data tab based on user input from dropdown menu
   output$graph1 <- renderPlotly( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
+    
     if(input$graphtype1 %in% c("laps")) {
       lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
         strip.background = element_blank(),
