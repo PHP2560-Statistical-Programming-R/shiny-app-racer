@@ -68,6 +68,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                     sliderInput("distrange1", label = h5("Select Distance"), 
                                                                 min = 0,
                                                                 max = 3.5, value = c(0, 3.5)))),
+                                    
+                                    fluidRow(column(width = 12, textOutput("text1"))),
                                     ######## graphical output for single data tab         
                                     fluidRow(column(width = 12, height = "auto",
                                                     plotlyOutput("graph1")),
@@ -75,7 +77,8 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                              verbatimTextOutput("event")),
                                     ######## summary statistics output for single data tab         
                                     fluidRow(column(width = 12,
-                                                    tableOutput("table1")))), 
+                                                    tableOutput("table1")))),
+                                    
                            
                            ######### tab for looking at two sets of data - compare two drivers or compare two laps of the same driver #########    
                            tabPanel("Compare", 
@@ -112,6 +115,10 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                                "Map of Lap Speed" = "mapspeed", "Air to Fuel Ratio vs RPM" = "airfuel",
                                                                                "Oil Pressure Map" = "oilpressure"),
                                                                 selected = "mapspeed"))),
+                                    fluidRow(column(width = 6, 
+                                                    textOutput("text2")),
+                                             column(width = 6, 
+                                                    textOutput("text3"))),
                                     ######## left graphical output for compare data tab 
                                     fluidRow(column(width = 6, height = "400px",
                                                     plotlyOutput("graph2")),
@@ -125,9 +132,7 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                              
                                              ######## right summary statistics output for compare data tab  
                                              column(width = 6,
-                                                    tableOutput("table3"))
-                                    )
-                           ))) 
+                                                    tableOutput("table3")))))) 
 
 
 
@@ -427,6 +432,137 @@ server <- function(input, output) {
         filter(Distance <= input$distrange2[2]) %>%
         summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
+    }
+  })
+  
+  
+  
+  output$text1 <- renderText({
+    if(input$graphtype1 %in% c("laps")) {
+      print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
+            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
+            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            graph is most useful for looking at how long it takes to complete a given section of the track.")
+      
+    } else if (input$graphtype1 %in% c("mapspeed")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The speed is recorded and displayed in miles per hour. This map uses a heat mapping to show
+            the change in speed as the driver drives around the track. Dark red is the slowest speed and pale yellow 
+            is the fastest.")
+      
+    } else if (input$graphtype1 %in% c("maprpm")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The RPM is recorded and displayed as engine revolutions per minute. This map 
+            uses a heat mapping to show the change in RPM as the driver drives around the track. Dark red 
+            is the slowest RPM and pale yellow is the fastest.")
+      
+    } else if (input$graphtype1 %in% c("throttle")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The throttle pressure is recorded and displayed as a percentage of full throttle. This map 
+            uses a heat mapping to show the change in throttle pressure as the driver drives around the track. Dark red 
+            is the lowest throttle pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype1 %in% c("braking")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The brake pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in brake pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype1 %in% c("airfuel")) {
+      print("This plot displays engine RPM on the x-axis and the ratio of air to fuel in the exhaust on the y-axis.
+            The line shows the linear trend of the relationship between these two variables as RPM increases.")
+      
+    } else if (input$graphtype1 %in% c("oilpressure")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
+    }
+  })
+  
+  output$text2 <- renderText({
+    if(input$graphtype2 %in% c("laps")) {
+      print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
+            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
+            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            graph is most useful for looking at how long it takes to complete a given section of the track.")
+      
+    } else if (input$graphtype2 %in% c("mapspeed")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The speed is recorded and displayed in miles per hour. This map uses a heat mapping to show
+            the change in speed as the driver drives around the track. Dark red is the slowest speed and pale yellow 
+            is the fastest.")
+      
+    } else if (input$graphtype2 %in% c("maprpm")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The RPM is recorded and displayed as engine revolutions per minute. This map 
+            uses a heat mapping to show the change in RPM as the driver drives around the track. Dark red 
+            is the slowest RPM and pale yellow is the fastest.")
+      
+    } else if (input$graphtype2 %in% c("throttle")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The throttle pressure is recorded and displayed as a percentage of full throttle. This map 
+            uses a heat mapping to show the change in throttle pressure as the driver drives around the track. Dark red 
+            is the lowest throttle pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype2 %in% c("braking")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The brake pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in brake pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype2 %in% c("airfuel")) {
+      print("This plot displays engine RPM on the x-axis and the ratio of air to fuel in the exhaust on the y-axis.
+            The line shows the linear trend of the relationship between these two variables as RPM increases.")
+      
+    } else if (input$graphtype2 %in% c("oilpressure")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
+    }
+  })
+  
+  output$text3 <- renderText({
+    if(input$graphtype3 %in% c("laps")) {
+      print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
+            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
+            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            graph is most useful for looking at how long it takes to complete a given section of the track.")
+      
+    } else if (input$graphtype3 %in% c("mapspeed")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The speed is recorded and displayed in miles per hour. This map uses a heat mapping to show
+            the change in speed as the driver drives around the track. Dark red is the slowest speed and pale yellow 
+            is the fastest.")
+      
+    } else if (input$graphtype3 %in% c("maprpm")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The RPM is recorded and displayed as engine revolutions per minute. This map 
+            uses a heat mapping to show the change in RPM as the driver drives around the track. Dark red 
+            is the slowest RPM and pale yellow is the fastest.")
+      
+    } else if (input$graphtype3 %in% c("throttle")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The throttle pressure is recorded and displayed as a percentage of full throttle. This map 
+            uses a heat mapping to show the change in throttle pressure as the driver drives around the track. Dark red 
+            is the lowest throttle pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype3 %in% c("braking")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The brake pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in brake pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
+      
+    } else if (input$graphtype3 %in% c("airfuel")) {
+      print("This plot displays engine RPM on the x-axis and the ratio of air to fuel in the exhaust on the y-axis.
+            The line shows the linear trend of the relationship between these two variables as RPM increases.")
+      
+    } else if (input$graphtype3 %in% c("oilpressure")) {
+      print("This plot displays a map of the track by plotting the longitude and latitude points of the car
+            on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
+            uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
+            is the lowest brake pressure and pale yellow is the highest.")
     }
   })
 }
