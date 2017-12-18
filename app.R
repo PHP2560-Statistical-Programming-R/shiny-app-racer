@@ -1,10 +1,11 @@
-#source(check_packages.R)
+#source("check_packages.R")
 
 library(shiny)
 library(tidyverse)
 library(shinythemes)
 library(racecar)
 library(plotly)
+
 ###requires racecar package
 
 ui <- fluidPage(theme = shinytheme("cyborg"),
@@ -69,8 +70,9 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                 max = 3.5, value = c(0, 3.5)))),
                                     ######## graphical output for single data tab         
                                     fluidRow(column(width = 12, height = "auto",
-                                                    plotlyOutput("graph1"))), 
-                                    verbatimTextOutput("event"),
+                                                    plotlyOutput("graph1")),
+                                    ######## test output for the point on the graph         
+                                             verbatimTextOutput("event")),
                                     ######## summary statistics output for single data tab         
                                     fluidRow(column(width = 12,
                                                     tableOutput("table1")))), 
@@ -117,7 +119,6 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                              column(width = 6, height = "400px",
                                                     plotlyOutput("graph3"))),
                                     
-                                    
                                     ######## left summary statistics output for compare data tab  
                                     fluidRow(column(width = 6,
                                                     tableOutput("table2")),
@@ -138,25 +139,46 @@ server <- function(input, output) {
   output$graph1 <- renderPlotly( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
     if(input$graphtype1 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      mapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      maprpm(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      throttle_position(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      braking_pattern(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) 
+      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } 
   })
@@ -168,24 +190,45 @@ server <- function(input, output) {
   output$graph2 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload2$datapath, 1)
     if(input$graphtype2 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
     } else if (input$graphtype2 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2] + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      ))
       
     } else if (input$graphtype2 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     }
     
@@ -194,24 +237,46 @@ server <- function(input, output) {
   output$graph3 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload3$datapath, 1)
     if(input$graphtype3 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
+      
     } else if (input$graphtype3 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     }
     
@@ -224,44 +289,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype1 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype1 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype1 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype1 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     } 
   })
@@ -274,44 +339,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype2 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype2 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype2 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype2 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype2 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     } else if (input$graphtype2 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     }
   })
@@ -323,44 +388,44 @@ server <- function(input, output) {
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
         group_by(lap) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype3 %in% c("mapspeed")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Speed = mean(GPS_Speed), Variance = sd(GPS_Speed))
+        summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype3 %in% c("maprpm")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_RPM = mean(PE3_RPM), Variance = sd(PE3_RPM))
+        summarise(Ave_RPM = mean(PE3_RPM), Sd_RPM = sd(PE3_RPM))
       
     } else if (input$graphtype3 %in% c("throttle")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Throttle = mean(PE3_TPS), Variance = sd(PE3_TPS))
+        summarise(Ave_Throttle = mean(PE3_TPS), Sd_Throttle = sd(PE3_TPS))
       
     } else if (input$graphtype3 %in% c("braking")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Break = mean(BPS_Front), Variance = sd(BPS_Front))
+        summarise(Ave_Break = mean(BPS_Front), Sd_Break = sd(BPS_Front))
       
       
     } else if (input$graphtype3 %in% c("airfuel")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Ratio = mean(PE3_LAMBDA), Variance = sd(PE3_LAMBDA))
+        summarise(Ave_Ratio = mean(PE3_LAMBDA), Sd_Ratio = sd(PE3_LAMBDA))
       
     }  else if (input$graphtype3 %in% c("oilpressure")) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Ave_Lon_Accel = mean(GPS_LonAcc))
+        summarise(Ave_Lat_Accel = mean(GPS_LatAcc), Sd_Lat_Accel = sd(GPS_LonAcc))
       
     }
   })
