@@ -117,25 +117,46 @@ server <- function(input, output) {
   output$graph1 <- renderPlotly( {
     input_data <- cleanSingleLap(input$upload1$datapath, 1)
     if(input$graphtype1 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      lapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      mapspeed(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      maprpm(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      throttle_position(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      braking_pattern(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2])
+      airfuel(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype1 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) 
+      oilpressure(input_data, 1, startdist = input$distrange1[1], enddist = input$distrange1[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } 
   })
@@ -147,24 +168,45 @@ server <- function(input, output) {
   output$graph2 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload2$datapath, 1)
     if(input$graphtype2 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
     } else if (input$graphtype2 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2] + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      ))
       
     } else if (input$graphtype2 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype2 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     }
     
@@ -173,24 +215,46 @@ server <- function(input, output) {
   output$graph3 <- renderPlotly({
     input_data <- cleanSingleLap(input$upload3$datapath, 1)
     if(input$graphtype3 %in% c("laps")) {
-      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      lapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
+      
     } else if (input$graphtype3 %in% c("mapspeed")) {
-      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      mapspeed(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("throttle")) {
-      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("braking")) {
-      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      braking_pattern(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("airfuel")) {
-      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      airfuel(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     } else if (input$graphtype3 %in% c("oilpressure")) {
-      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2])
+      oilpressure(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+      )
       
     }
     
