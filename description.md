@@ -1,9 +1,16 @@
 # Add description as well as the break down of work to be done by group. 
 
 Use of app:
-(Blain)
+
+Our app uses .csv data that is exported from racestudio2. The data is collected from live telemetry instruments on the Brown Formula Racing car. The app is useful because it allows the raw data to be converted quickly into common race analysis graphs. The app can be used to assist with driver training as well as diagnose certain car problems. The compare feature allows comparisons between drivers as well as comparisons of different variables from a single lap. For example, the app could be used to compare what happens to oil pressure as the car breaks around a certain corner.    
+
+
+
 Creation process:
 (Fuyu)
+
+
+
 Individual roles:
 
 # Blain:
