@@ -288,7 +288,7 @@ server <- function(input, output) {
       input_data %>%
         filter(Distance >= input$distrange1[1]) %>%
         filter(Distance <= input$distrange1[2]) %>%
-        group_by(lap) %>%
+        group_by(Lap) %>%
         summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
@@ -338,7 +338,7 @@ server <- function(input, output) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        group_by(lap) %>%
+        group_by(Lap) %>%
         summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype2 %in% c("mapspeed")) {
@@ -387,7 +387,7 @@ server <- function(input, output) {
       input_data %>%
         filter(Distance >= input$distrange2[1]) %>%
         filter(Distance <= input$distrange2[2]) %>%
-        group_by(lap) %>%
+        group_by(Lap) %>%
         summarise(Ave_Speed = mean(GPS_Speed), Sd_Speed = sd(GPS_Speed))
       
     } else if (input$graphtype3 %in% c("mapspeed")) {
@@ -435,8 +435,7 @@ server <- function(input, output) {
   output$text1 <- renderText({
     if(input$graphtype1 %in% c("laps")) {
       print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
-            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
-            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            scheme as a heat map to show changes in speed. Dark Red is the slowest speed and pale yellow is the fastest. This
             graph is most useful for looking at how long it takes to complete a given section of the track.")
       
     } else if (input$graphtype1 %in% c("mapspeed")) {
@@ -478,8 +477,7 @@ server <- function(input, output) {
   output$text2 <- renderText({
     if(input$graphtype2 %in% c("laps")) {
       print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
-            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
-            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            scheme as a heat map to show changes in speed. Dark Red is the slowest speed and pale yellow is the fastest. This
             graph is most useful for looking at how long it takes to complete a given section of the track.")
       
     } else if (input$graphtype2 %in% c("mapspeed")) {
@@ -521,8 +519,7 @@ server <- function(input, output) {
   output$text3 <- renderText({
     if(input$graphtype3 %in% c("laps")) {
       print("This plot displays the speed change over the distance of a single lap. This plot uses a rainbow color
-            scheme as a heat map to show changes in speed. Red is the slowest speed and purple is the fastest. This
-            graph provides a finer gradient of speed over the lap compared to the 'Map of Lap Speed' plot. This
+            scheme as a heat map to show changes in speed. Dark Red is the slowest speed and pale yellow is the fastest. This
             graph is most useful for looking at how long it takes to complete a given section of the track.")
       
     } else if (input$graphtype3 %in% c("mapspeed")) {
