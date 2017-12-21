@@ -36,7 +36,21 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                                        drivers, comparing 2 laps completed by the same driver, or looking at different variables for the
                                                                       same lap."),
                                 
-                                                              tags$h5("raceR is designed to be used with telemetry data from the Brown Formula Racing Team.")))),
+                                                              tags$h5("raceR is designed to be used with telemetry data from the Brown Formula Racing Team."),
+                                                              tags$h5("This app provides users multiple ways to look at data."),
+                                                              tags$h5("Under the 'SINGLE' tab you can look at graphs from a single .csv file"),
+                                                              tags$img(src = "one.png", style = "height:35; width:35"),
+                                                              tags$h5("After uploading a .csv file exported from racestudio2, you may choose between a variety of different graphs"),
+                                                              tags$img(src = "two.png"),
+                                                              tags$h5("You can choose which part of the track you want your graph to show"),
+                                                              tags$img(src = "three.png"),
+                                                              tags$h5("You can also hover on any point of the graph to see the exact value at that point."),
+                                                              tags$img(src = "four.png", style = "height:35; width:35"),
+                                                              tags$h5("The 'COMPARE' tab provides all the same functionality as the 'SINGLE' tab, but allows users to compare the same plots among different drivers,
+                                                                      the same plots among the same driver driving different laps, or different plots from the same data set"),
+                                                              tags$img(src = "five.png"),
+                                                              tags$h5("Below is an example of comparing the speed around the track for the same driver on 2 different laps"),
+                                                              tags$img(src = "six.png")))),
                            
                            
                            ######### tab for looking at one set of data - for one driver or one lap #########       
@@ -201,10 +215,10 @@ server <- function(input, output) {
       )
       
     } else if (input$graphtype2 %in% c("maprpm")) {
-      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2] + theme(
+      maprpm(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
         strip.background = element_blank(),
         strip.text.x = element_blank()
-      ))
+      )
       
     } else if (input$graphtype2 %in% c("throttle")) {
       throttle_position(input_data, 1, startdist = input$distrange2[1], enddist = input$distrange2[2]) + theme(
