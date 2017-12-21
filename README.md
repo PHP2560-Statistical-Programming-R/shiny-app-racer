@@ -6,6 +6,10 @@
 4. Check daily for feedback in the `feedback.md`. 
 
 ---------------------------------
+Please see the description.md file for more information about the use and creation of this app as well as the individual roles of each group member.
+
+
+---------------------------------
 Before running this app verify that you have the following packages installed and loaded into R. If you need to install or load any of these packages, run the following commands for the packages that you are missing. 
 
 install.packages("shiny")
