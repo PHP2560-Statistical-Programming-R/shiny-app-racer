@@ -20,7 +20,7 @@ Individual roles:
 - Helped design the layout of the app
 - Helped write the code in graph output
 - added renderplotly and verbatimTextOutput code to shiny app
-- added legends to plots
+- added legends and titles to plots
 
 # Jess: 
 - Helped design and implement the layout of the app
