@@ -56,6 +56,7 @@ ui <- fluidPage(theme = shinytheme("cyborg"),
                                                               tags$img(src = "logo.jpg")), 
                                                        column(width = 6, 
                                                               tags$h1("raceR", style = "color:red;"))),
+                                    
                                     ######## csv upload box for single data tab
                                     
                                     fluidRow(column(width = 12,
@@ -482,7 +483,7 @@ server <- function(input, output) {
       print("This plot displays a map of the track by plotting the longitude and latitude points of the car
             on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
             uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
-            is the lowest brake pressure and pale yellow is the highest.")
+            is the lowest oil pressure and pale yellow is the highest.")
     }
   })
   
@@ -524,7 +525,7 @@ server <- function(input, output) {
       print("This plot displays a map of the track by plotting the longitude and latitude points of the car
             on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
             uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
-            is the lowest brake pressure and pale yellow is the highest.")
+            is the lowest oil pressure and pale yellow is the highest.")
     }
   })
   
@@ -566,7 +567,7 @@ server <- function(input, output) {
       print("This plot displays a map of the track by plotting the longitude and latitude points of the car
             on the x and y axes. The oil pressure is recorded and displayed as pounds per square inch. This map 
             uses a heat mapping to show the change in oil pressure as the driver drives around the track. Dark red 
-            is the lowest brake pressure and pale yellow is the highest.")
+            is the lowest oil pressure and pale yellow is the highest.")
     }
   })
 }
